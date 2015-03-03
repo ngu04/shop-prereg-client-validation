@@ -2,6 +2,8 @@
 target
 .DS_Store
 
+
+bower_components
 prereg-validation.iml
 
 

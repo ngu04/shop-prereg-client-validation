@@ -5,7 +5,7 @@
   "homepage": "https://github.com/bskyb-commerce/prereg-client-validation",
   "private": true,
   "dependencies": {
-    "angular": "1.2.27",
+    "angular": "1.2.27"
   },
   "main" :"dist/prereg-client-validation.js"
 }

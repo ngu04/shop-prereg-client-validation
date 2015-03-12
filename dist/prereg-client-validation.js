@@ -124,3 +124,55 @@ preregCommonDirectives.directive('houseValidate', [
 
     }
 ]);
+
+preregCommonDirectives.directive('contactnumberValidate', [
+    function() {
+
+        var link = function($scope, $element, $attrs, ctrl) {
+
+            var validate = function(viewValue) {
+
+                var regex = new RegExp("^[0-9]{10,15}$");
+
+                ctrl.$setValidity('contactnumberValidate', regex.test(viewValue));
+                return viewValue;
+            };
+
+            ctrl.$parsers.unshift(validate);
+            ctrl.$formatters.push(validate);
+
+            $attrs.$observe('contactnumberValidate', function(){
+                return validate(ctrl.$viewValue);
+            });
+
+        };
+
+        return {
+            require: 'ngModel',
+            link: link
+        };
+
+    }
+
+]);
+
+
+preregCommonDirectives.directive('serverError',[
+  function(){
+
+    var link = function($scope, $element, $attrs, $ctrl) {
+                  $element.on('change',function(){
+                                          $scope.$apply(function(){
+                                                $ctrl.$setValidity('server', true)
+                        })
+                   });
+            };
+
+
+    return{
+        require: 'ngModel',
+        link:link
+     };
+
+   }
+  ]);

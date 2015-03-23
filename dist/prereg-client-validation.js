@@ -158,21 +158,20 @@ preregCommonDirectives.directive('contactnumberValidate', [
 
 
 preregCommonDirectives.directive('serverError',[
-  function(){
+    function(){
 
-    var link = function($scope, $element, $attrs, $ctrl) {
-                  $element.on('change',function(){
-                                          $scope.$apply(function(){
-                                                $ctrl.$setValidity('server', true)
-                        })
-                   });
-            };
+        var link = function($scope, $element, $attrs, $ctrl) {
+            $element.on('change',function(){
+                $scope.$apply(function(){
+                    $ctrl.$setValidity('server', true)
+                })
+            });
+        };
 
+        return {
+            require: 'ngModel',
+            link:link
+         };
 
-    return{
-        require: 'ngModel',
-        link:link
-     };
-
-   }
-  ]);
+    }
+]);

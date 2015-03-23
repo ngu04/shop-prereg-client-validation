@@ -94,7 +94,6 @@ preregCommonDirectives.directive('nameValidate', [
     }
 ]);
 
-
 preregCommonDirectives.directive('houseValidate', [
     function() {
 
@@ -125,7 +124,7 @@ preregCommonDirectives.directive('houseValidate', [
     }
 ]);
 
-preregCommonDirectives.directive('contactnumberValidate', [
+preregCommonDirectives.directive('contactNumberValidate', [
     function() {
 
         var link = function($scope, $element, $attrs, ctrl) {
@@ -155,7 +154,6 @@ preregCommonDirectives.directive('contactnumberValidate', [
     }
 
 ]);
-
 
 preregCommonDirectives.directive('serverError',[
     function(){

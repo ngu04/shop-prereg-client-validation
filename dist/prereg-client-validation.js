@@ -132,22 +132,3 @@ preregCommonDirectives.directive('contactNumberValidate', [
     }
 
 ]);
-
-preregCommonDirectives.directive('serverError',[
-    function(){
-
-        var link = function($scope, $element, $attrs, $ctrl) {
-            $element.on('change',function(){
-                $scope.$apply(function(){
-                    $ctrl.$setValidity('server', true)
-                })
-            });
-        };
-
-        return {
-            require: 'ngModel',
-            link:link
-         };
-
-    }
-]);

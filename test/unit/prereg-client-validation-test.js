@@ -103,7 +103,7 @@ describe('Prereg Client Validation', function() {
 
     });
 
-    describe('houseValidate', function() {
+    describe('contactNumberValidate', function() {
         it('is valid', function() {
             var element = $compile('<form name=form><input type="text" ng:model="number" name=number contact-number-validate></form>')($rootScope);
 

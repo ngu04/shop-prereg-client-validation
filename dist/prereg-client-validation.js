@@ -108,21 +108,20 @@ preregCommonDirectives.directive('contactNumberValidate', [
 
         var link = function($scope, $element, $attrs, ctrl) {
 
+            var regex = new RegExp("^[0-9]{10,15}$");
+
             var validate = function(viewValue) {
 
-                var regex = new RegExp("^[0-9]{10,15}$");
+                if (viewValue === "" || viewValue === null || viewValue === undefined) {
+                   ctrl.$setValidity('contactNumberValidate', true);
+                   return viewValue;
+                }
 
                 ctrl.$setValidity('contactnumberValidate', regex.test(viewValue));
                 return viewValue;
             };
 
             ctrl.$parsers.unshift(validate);
-            ctrl.$formatters.push(validate);
-
-            $attrs.$observe('contactnumberValidate', function(){
-                return validate(ctrl.$viewValue);
-            });
-
         };
 
         return {

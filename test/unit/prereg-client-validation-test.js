@@ -103,4 +103,24 @@ describe('Prereg Client Validation', function() {
 
     });
 
+    describe('houseValidate', function() {
+        it('is valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="number" name=number contact-number-validate></form>')($rootScope);
+
+            $rootScope.form.number.$setViewValue("1234567890");
+            expect($rootScope.form.number.$valid).toBe(true);
+        });
+
+        it('is not valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="number" name=number contact-number-validate></form>')($rootScope);
+
+            $rootScope.form.number.$setViewValue("123");
+            expect($rootScope.form.number.$valid).toBe(false);
+
+            $rootScope.form.number.$setViewValue("Hello");
+            expect($rootScope.form.number.$valid).toBe(false);
+        });
+
+    });
+
 });

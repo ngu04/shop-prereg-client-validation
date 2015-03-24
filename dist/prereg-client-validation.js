@@ -84,20 +84,14 @@ preregCommonDirectives.directive('houseValidate', [
 
         var link = function($scope, $element, $attrs, ctrl) {
 
+            var regex = new RegExp("^[-A-ZÁÉÍÓÚáéíóúa-z0-9 &',./]*$");
+
             var validate = function(viewValue) {
-
-                var regex = new RegExp("^[-A-Za-z0-9 &',./]*$");
-
                 ctrl.$setValidity('houseValidate', regex.test(viewValue));
                 return viewValue;
             };
 
             ctrl.$parsers.unshift(validate);
-            ctrl.$formatters.push(validate);
-
-            $attrs.$observe('houseValidate', function(){
-                return validate(ctrl.$viewValue);
-            });
 
         };
 

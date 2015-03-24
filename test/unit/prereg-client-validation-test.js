@@ -88,4 +88,19 @@ describe('Prereg Client Validation', function() {
 
     });
 
+
+    describe('houseValidate', function() {
+        it('is valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="house" name=house house-validate></form>')($rootScope);
+
+            $rootScope.form.house.$setViewValue("Antonio's house");
+            expect($rootScope.form.house.$valid).toBe(true);
+
+            $rootScope.form.house.$setViewValue("Ceol na bPáistí");
+            expect($rootScope.form.house.$valid).toBe(true);
+
+        });
+
+    });
+
 });

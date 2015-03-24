@@ -15,7 +15,7 @@ describe('Prereg Client Validation', function() {
 
     describe('emailCheck', function() {
 
-        it('does email validation', function() {
+        it('is not valid', function() {
 
             $rootScope.customer = { confirmEmail: null, email: null };
 
@@ -27,7 +27,7 @@ describe('Prereg Client Validation', function() {
             expect($rootScope.form.custConfirmEmail.$valid).toBe(false);
         });
 
-        it('passes email confirmation', function() {
+        it('is valid', function() {
 
             var element = $compile('<form name="form"><input type="email" name="custEmail" ng:model="customer.email" required placeholder="eg. john@sky.com" /><input type="email" name="custConfirmEmail" ng:model="customer.confirmEmail" required placeholder="eg. john@sky.com" email-check="{{customer.email}}" /></form>')($rootScope);
 
@@ -39,9 +39,30 @@ describe('Prereg Client Validation', function() {
             expect($rootScope.form.custEmail.$valid).toBe(true);
         });
 
-        it('Adds email validate function to parsers', function() {
-            var element = $compile('<form name="form"><input type="email" name="custEmail" ng:model="customer.email" required placeholder="eg. john@sky.com" /><input type="email" name="custConfirmEmail" ng:model="customer.confirmEmail" required placeholder="eg. john@sky.com" email-check="{{customer.email}}" /></form>')($rootScope);
-            expect($rootScope.form.custEmail.$parsers[0]("a")).toEqual("a");
+    });
+
+    describe('postcodeValidate', function() {
+        it('is valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="postcode" name=postcode postcode-validate></form>')($rootScope);
+
+            $rootScope.form.postcode.$setViewValue("TW9 9DE");
+            expect($rootScope.form.postcode.$valid).toBe(true);
+
+            $rootScope.form.postcode.$setViewValue("TW99DE");
+            expect($rootScope.form.postcode.$valid).toBe(true);
+        });
+
+        it('is not valid', function() {
+            var element = $compile('<form name=form><input type=text ng:model="postcode" name=postcode postcode-validate></form>')($rootScope);
+
+            $rootScope.form.postcode.$setViewValue('INValid');
+            expect($rootScope.form.postcode.$valid).toBe(false);
+
+            $rootScope.form.postcode.$setViewValue('123')
+            expect($rootScope.form.postcode.$valid).toBe(false);
+
+            $rootScope.form.postcode.$setViewValue('&^$£./')
+            expect($rootScope.form.postcode.$valid).toBe(false);
         });
 
     });

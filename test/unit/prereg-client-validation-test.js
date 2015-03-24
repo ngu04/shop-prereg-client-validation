@@ -67,4 +67,25 @@ describe('Prereg Client Validation', function() {
 
     });
 
+    describe('nameValidate', function() {
+        it('is valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="name" name=name name-validate></form>')($rootScope);
+
+            $rootScope.form.name.$setViewValue("António");
+            expect($rootScope.form.name.$valid).toBe(true);
+
+        });
+
+        it('is not valid', function() {
+            var element = $compile('<form name=form><input type="text" ng:model="name" name=name name-validate></form>')($rootScope);
+
+            $rootScope.form.name.$setViewValue('123')
+            expect($rootScope.form.name.$valid).toBe(false);
+
+            $rootScope.form.name.$setViewValue('&^$£./')
+            expect($rootScope.form.name.$valid).toBe(false);
+        });
+
+    });
+
 });

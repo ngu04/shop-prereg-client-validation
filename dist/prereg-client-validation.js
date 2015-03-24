@@ -60,20 +60,14 @@ preregCommonDirectives.directive('nameValidate', [
 
         var link = function($scope, $element, $attrs, ctrl) {
 
+            var regex = new RegExp("^[ A-Za-zÁÉÍÓÚáéíóú'-]{2,40}$");
+
             var validate = function(viewValue) {
-
-                var regex = new RegExp("^[ A-Za-zÁÉÍÓÚáéíóú'-]{2,40}$");
-
                 ctrl.$setValidity('nameValidate', regex.test(viewValue));
                 return viewValue;
             };
 
             ctrl.$parsers.unshift(validate);
-            ctrl.$formatters.push(validate);
-
-            $attrs.$observe('nameValidate', function(){
-                return validate(ctrl.$viewValue);
-            });
 
         };
 

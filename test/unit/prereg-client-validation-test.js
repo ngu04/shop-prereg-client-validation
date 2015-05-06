@@ -13,10 +13,33 @@ describe('Prereg Client Validation', function() {
         $rootScope = _$rootScope_.$new();
     }));
 
+    describe('selectValidate', function() {
+
+        it('is not valid', function() {
+            $rootScope.customer = { typeOfProperty: null };
+            $rootScope.typeOfProperties = ['Detached', 'Semi-detached'];
+
+            var element = $compile('<form name="form"><select name="custProperty" ng:model="customer.typeOfProperty" required select-validate ng-options="typeOfProperty for typeOfProperty in typeOfProperties track by typeOfProperty"></form>')($rootScope);
+
+            $rootScope.$digest();
+
+            expect($rootScope.form.custProperty.$valid).toBe(false);
+        });
+
+        it('is valid', function() {
+            var element = $compile('<form name="form"><select name="custProperty" ng:model="customer.typeOfProperty" required select-validate ng-options="typeOfProperty for typeOfProperty in typeOfProperties track by typeOfProperty"></form>')($rootScope);
+
+            $rootScope.form.custProperty.$setViewValue('Detached');
+            $rootScope.$digest();
+
+            expect($rootScope.form.custProperty.$valid).toBe(true);
+        });
+
+    });
+
     describe('emailCheck', function() {
 
         it('is not valid', function() {
-
             $rootScope.customer = { confirmEmail: null, email: null };
 
             var element = $compile('<form name="form"><input type="email" name="custConfirmEmail" ng:model="customer.confirmEmail" required placeholder="eg. john@sky.com" email-check="{{customer.email}}" server-error/></form>')($rootScope);

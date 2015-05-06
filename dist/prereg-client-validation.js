@@ -2,6 +2,28 @@
 
 var preregCommonDirectives = angular.module('preregCommonDirectives', []);
 
+preregCommonDirectives.directive('selectValidate', [
+  function() {
+    var link = function ($scope, $element, $attrs, ctrl) {
+      var validate = function (viewValue) {
+        ctrl.$setValidity('selectValidate', viewValue !== '?')
+        return viewValue;
+      };
+
+      ctrl.$parsers.unshift(validate);
+      $element.bind('blur', function() {
+        ctrl.$touched = true;
+        $scope.$apply();
+      });
+    }
+
+    return {
+        require: 'ngModel',
+        link: link
+    };
+  }
+]);
+
 preregCommonDirectives.directive('emailCheck', [
     function() {
 
